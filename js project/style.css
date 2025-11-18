@@ -1,0 +1,39 @@
+:root{
+  --accent:orangered;
+  --bg:white;
+  --card:white;
+  --text:black;
+  --muted:grey;
+  --container:1100px;
+  --radius:8px;
+}
+*{box-sizing:border-box}
+body{font-family: "Helvetica Neue", Arial, sans-serif;margin:0;color:var(--text);background:var(--bg);-webkit-font-smoothing:antialiased}
+.container{max-width:var(--container);margin:0 auto;padding:0 18px}
+.site-header{background:var(--accent);color:white;position:sticky;top:0;z-index:30}
+.header-inner{display:flex;align-items:center;justify-content:space-between;padding:14px 18px}
+.logo{font-weight:700}
+.logo span{margin-left:8px;letter-spacing:1px}
+.hamburger{background:transparent;border:0;color:white;font-size:20px;cursor:pointer}
+.offcanvas{position:fixed;right:-340px;top:0;width:340px;height:100%;background:white;box-shadow:-8px 0 24px rgba(0,0,0,.12);transition:right .28s;padding:18px;z-index:60}
+.offcanvas.open{right:0}
+.offcanvas .close{float:right;border:0;background:transparent;font-size:20px;cursor:pointer}
+.offcanvas ul{list-style:none;padding:14px 0;margin:0}
+.offcanvas li{padding:12px 8px;border-bottom:1px solid white;color:var(--text);cursor:pointer}
+
+/* Hero */
+.hero{background-image:linear-gradient(rgba(0,0,0,.35),rgba(0,0,0,.35)), url('https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=1400&q=60');background-size:cover;background-position:center;padding:60px 0;color:white}
+.small-hero{padding:36px 0;background-image:linear-gradient(rgba(0,0,0,.15),rgba(0,0,0,.15)), url('https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?auto=format&fit=crop&w=1400&q=60')}
+.hero-inner{display:flex;flex-direction:column;align-items:center;text-align:center}
+.search-form{display:flex;gap:10px;margin-bottom:18px}
+.search-form input{width:360px;max-width:70vw;padding:14px 18px;border-radius:999px;border:0;outline:none}
+.search-form button{background:var(--accent);border:0;color:white;padding:12px 14px;border-radius:999px;cursor:pointer}
+
+/* Headings */
+h1{font-size:36px;margin:10px 0 6px}
+.sub{letter-spacing:2px;font-size:12px}
+
+/* Sections */
+.categories-section, .meals-section{padding:36px 0}
+.categories-section h2, .meals-section h2{font-size:22px;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}

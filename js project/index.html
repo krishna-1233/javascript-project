@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Meal Finder</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body id="page-home">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">🍽 <span>MEAL FINDER</span></div>
+      <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
+    </div>
+    <nav id="offcanvas" class="offcanvas">
+      <button id="closeOff" class="close">✕</button>
+      <ul id="categoryListOff"></ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner container">
+        <form id="searchForm" class="search-form" action="meals.html">
+          <input name="search" id="searchInput" placeholder="Search recipes here ..." />
+          <button type="submit" title="search">🔍</button>
+        </form>
+        <h1>What are your favorite cuisines?</h1>
+        <p class="sub">PERSONALIZE YOUR EXPERIENCE</p>
+      </div>
+    </section>
+
+    <section class="container categories-section">
+      <h2>Categories</h2>
+      <div id="categoriesGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer container">
+    <small>Meal Finder • Data from TheMealDB</small>
+  </footer>
+
+  <script src="./script.js" type="module"></script>
+</body>
+</html>
