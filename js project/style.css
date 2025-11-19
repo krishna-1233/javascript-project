@@ -37,3 +37,16 @@ h1{font-size:36px;margin:10px 0 6px}
 .categories-section, .meals-section{padding:36px 0}
 .categories-section h2, .meals-section h2{font-size:22px;margin-bottom:18px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+/* Card */
+.card{background:var(--card);border-radius:6px;padding:10px;box-shadow:0 6px 18px rgba(0,0,0,.06);overflow:hidden}
+.cat-thumb{height:130px;display:block;width:100%;object-fit:cover;border-radius:4px}
+.badge{position:relative;display:inline-block;background:var(--accent);color:#fff;padding:6px 10px;border-radius:6px;font-weight:700;font-size:12px;margin-top:8px}
+
+/* Meal card content */
+.meal-title{font-weight:700;margin-top:10px;font-size:14px}
+.meal-info{color:var(--muted);font-size:13px}
+
+/* No results */
+.no-results{padding:28px;background:#fff;border-radius:6px;text-align:center;margin-top:18px}
+
+

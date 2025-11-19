@@ -52,3 +52,115 @@ async function setupCommon(){
     });
   }
 }
+/* -------------------------
+   Fetch categories
+   ------------------------- */
+async function fetchCategories(){
+  try{
+    const res = await fetch(`${API_ROOT}/categories.php`);
+    const data = await res.json();
+    return data.categories || [];
+  }catch(err){
+    console.error('Error fetching categories', err);
+    return [];
+  }
+}
+
+/* -------------------------
+   HOME: render categories grid
+   ------------------------- */
+async function initHome(){
+  const cats = await fetchCategories();
+  const container = document.getElementById('categoriesGrid');
+  if (!container) return;
+  container.innerHTML = cats.map(c => `
+    <a class="card" href="meals.html?category=${encodeURIComponent(c.strCategory)}" title="View ${c.strCategory}">
+      <img class="cat-thumb" src="${c.strCategoryThumb}" alt="${c.strCategory}" />
+      <div class="badge">${c.strCategory}</div>
+    </a>
+  `).join('');
+}
+
+/* -------------------------
+   Meals listing (category or search)
+   ------------------------- */
+async function fetchMealsByCategory(category){
+  try{
+    const res = await fetch(`${API_ROOT}/filter.php?c=${encodeURIComponent(category)}`);
+    const data = await res.json();
+    return data.meals || [];
+  }catch(err){ console.error(err); return []; }
+}
+async function fetchMealsBySearch(q){
+  try{
+    const res = await fetch(`${API_ROOT}/search.php?s=${encodeURIComponent(q)}`);
+    const data = await res.json();
+    return data.meals || [];
+  }catch(err){ console.error(err); return []; }
+}
+
+function renderMealsGrid(meals){
+  const grid = document.getElementById('mealsGrid');
+  const noRes = document.getElementById('noResults');
+  if (!grid) return;
+  if (!meals || meals.length === 0){
+    grid.innerHTML = '';
+    if (noRes) noRes.hidden = false;
+    return;
+  }
+  if (noRes) noRes.hidden = true;
+  grid.innerHTML = meals.map(m => `
+    <a class="card" href="meal-details.html?id=${m.idMeal}">
+      <img class="cat-thumb" src="${m.strMealThumb}" alt="${m.strMeal}" />
+      <div class="meal-title">${m.strMeal}</div>
+      <div class="meal-info">${m.strArea || ''} ${m.strCategory ? '• ' + m.strCategory : ''}</div>
+    </a>
+  `).join('');
+}
+
+async function initMealsPage(){
+  const category = getQueryParam('category');
+  const search = getQueryParam('search');
+  const heroTitle = document.getElementById('heroTitle');
+  if (category){
+    if (heroTitle) heroTitle.textContent = `Category: ${category}`;
+    const meals = await fetchMealsByCategory(category);
+    renderMealsGrid(meals);
+  } else if (search){
+    if (heroTitle) heroTitle.textContent = `Search: ${search}`;
+    const meals = await fetchMealsBySearch(search);
+    renderMealsGrid(meals);
+  } else {
+    // default: show popular categories' first meals (or empty)
+    if (heroTitle) heroTitle.textContent = 'Browse meals';
+    const cats = await fetchCategories();
+    // pull first 12 meals from first few categories to show something
+    const sample = [];
+    for (let i=0; i<Math.min(6,cats.length); i++){
+      const m = await fetchMealsByCategory(cats[i].strCategory);
+      if (m && m.length) sample.push(...m.slice(0,3));
+    }
+    renderMealsGrid(sample);
+  }
+}
+
+/* -------------------------
+   Meal details
+   ------------------------- */
+async function fetchMealById(id){
+  try{
+    const res = await fetch(`${API_ROOT}/lookup.php?i=${encodeURIComponent(id)}`);
+    const data = await res.json();
+    return (data.meals && data.meals[0]) || null;
+  }catch(err){ console.error(err); return null; }
+}
+
+function extractIngredients(meal){
+  const list = [];
+  for (let i=1;i<=20;i++){
+    const ing = meal[`strIngredient${i}`];
+    const measure = meal[`strMeasure${i}`];
+    if (ing && ing.trim()) list.push({ingredient:ing.trim(), measure: measure ? measure.trim() : ''});
+  }
+  return list;
+}

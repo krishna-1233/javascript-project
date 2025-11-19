@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Meal Details</title>
+  <title>Meals</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body id="page-details">
+<body id="page-meals">
   <header class="site-header">
     <div class="container header-inner">
       <div class="logo"><a href="index.html">🍽 <span>MEAL FINDER</span></a></div>
@@ -25,12 +25,13 @@
           <input name="search" id="searchInput" placeholder="Search recipes here ..." />
           <button type="submit" title="search">🔍</button>
         </form>
+        <h1 id="heroTitle">Meals</h1>
       </div>
     </section>
 
-    <section class="container details-section">
-      <a id="backBtn" class="back" href="javascript:history.back()">← Back</a>
-      <div id="mealDetails" class="meal-details"></div>
+    <section class="container meals-section">
+      <div id="mealsGrid" class="grid"></div>
+      <div id="noResults" class="no-results" hidden>No results found.</div>
     </section>
   </main>
 
