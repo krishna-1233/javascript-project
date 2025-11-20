@@ -164,3 +164,59 @@ function extractIngredients(meal){
   }
   return list;
 }
+function renderMealDetails(meal){
+  const container = document.getElementById('mealDetails');
+  if (!container || !meal) return container.innerHTML = '<p>Meal not found</p>';
+  const ingredients = extractIngredients(meal);
+  container.innerHTML = `
+    <div class="card">
+      <img src="${meal.strMealThumb}" alt="${meal.strMeal}" />
+    </div>
+    <div class="meal-meta">
+      <h2>${meal.strMeal}</h2>
+      <div class="badge-list">
+        <span class="tag">${meal.strCategory || ''}</span>
+        <span class="tag">${meal.strArea || ''}</span>
+      </div>
+      <p><strong>Source:</strong> ${meal.strSource ? `<a href="${meal.strSource}" target="_blank" rel="noopener">link</a>` : 'N/A'}</p>
+      <h3>Ingredients</h3>
+      <ul>
+        ${ingredients.map(i => `<li>${i.measure} ${i.ingredient}</li>`).join('')}
+      </ul>
+      <h3>Instructions</h3>
+      <div>${(meal.strInstructions || '').replace(/\r\n/g,'<br/>')}</div>
+      ${meal.strYoutube ? `<h3>Video</h3><a href="${meal.strYoutube}" target="_blank" rel="noopener">Watch on YouTube</a>` : ''}
+    </div>
+  `;
+}
+
+async function initDetailsPage(){
+  const id = getQueryParam('id');
+  if (!id){
+    document.getElementById('mealDetails').innerHTML = '<p>No meal selected.</p>';
+    return;
+  }
+  const meal = await fetchMealById(id);
+  renderMealDetails(meal);
+}
+
+/* -------------------------
+   init: decide which page to run
+   ------------------------- */
+(async function init(){
+  await setupCommon();
+
+  const pageId = document.body.id || '';
+  if (pageId === 'page-home'){
+    await initHome();
+  } else if (pageId === 'page-meals'){
+    // If there's a "search" query param, prefill the search input
+    const q = getQueryParam('search');
+    if (q && searchInput()) searchInput().value = q;
+    await initMealsPage();
+  } else if (pageId === 'page-details'){
+    const q = getQueryParam('search');
+    if (q && searchInput()) searchInput().value = q;
+    await initDetailsPage();
+  }
+})();
