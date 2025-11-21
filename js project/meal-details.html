@@ -1,43 +1,36 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Meal Details</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body id="page-details">
   <header class="site-header">
     <div class="container header-inner">
-      <div class="logo"><a href="index.html">🍽 <span>MEAL FINDER</span></a></div>
-      <button id="hamburger" class="hamburger" aria-label="menu">☰</button>
+      <div class="logo"><a href="index.html">🍽 <span>MEAL FINDER</span></a></div> <button id="hamburger"
+        class="hamburger" aria-label="menu">☰</button>
     </div>
-    <nav id="offcanvas" class="offcanvas">
-      <button id="closeOff" class="close">✕</button>
+    <nav id="offcanvas" class="offcanvas"> <button id="closeOff" class="close">✕</button>
       <ul id="categoryListOff"></ul>
     </nav>
   </header>
-
   <main>
     <section class="hero small-hero">
       <div class="hero-inner container">
-        <form id="searchForm" class="search-form" action="meals.html">
-          <input name="search" id="searchInput" placeholder="Search recipes here ..." />
-          <button type="submit" title="search">🔍</button>
-        </form>
+        <form id="searchForm" class="search-form" action="meals.html"> <input name="search" id="searchInput"
+            placeholder="Search recipes here ..." /> <button type="submit" title="search">🔍</button> </form>
       </div>
     </section>
-
-    <section class="container details-section">
-      <a id="backBtn" class="back" href="javascript:history.back()">← Back</a>
+    <section class="container details-section"> <a id="backBtn" class="back" href="javascript:history.back()">← Back</a>
       <div id="mealDetails" class="meal-details"></div>
     </section>
   </main>
-
-  <footer class="site-footer container">
-    <small>Meal Finder • Data from TheMealDB</small>
-  </footer>
-
+  <footer class="site-footer container"> <small>Meal Finder • Data from TheMealDB</small> </footer>
   <script src="./script.js" type="module"></script>
 </body>
+
 </html>

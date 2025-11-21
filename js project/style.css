@@ -51,9 +51,47 @@ h1{font-size:36px;margin:10px 0 6px}
 /* Meal details layout */
 .meal-details{display:grid;grid-template-columns: 380px 1fr;gap:24px;align-items:start}
 .meal-details img{width:100%;border-radius:6px;display:block}
-.meal-meta h2{margin-top:0}
+
 .badge-list{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
 .tag{background:#fff;border:1px solid #eee;padding:6px 8px;border-radius:4px;color:var(--muted);font-size:12px}
+/* Ingredient Box */
+.ingredients-box {
+    margin-top: 20px;
+    background: #fff8e6;
+    border-left: 6px solid var(--accent);
+    padding: 18px 20px;
+    border-radius: 8px;
+}
+
+.ingredients-box h3 {
+    margin-bottom: 12px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.ingredients-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ingredients-list li {
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 15px;
+}
+.selected-meal-title {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.meal-details-container {
+    margin-top: 20px;
+}
+
+
+
 
 /* small */
 .back{display:inline-block;margin:14px 0;color:var(--accent);text-decoration:none;font-weight:700}
